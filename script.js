@@ -33,6 +33,9 @@ function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
 }
 
+const sumCart = [];
+const totalCart = 0;
+
 function cartItemClickListener(event) {
   const idRemove = event.target;
   idRemove.remove();
@@ -55,11 +58,6 @@ const callFetch = async () => {
   return arrayReturn;
 };
 
-// function addStorage() => {
-  //   //toda vez que pegar o produto, dar push no array  
-  // }
-  // localStorage.setItem('cart', value) /* puxa como string no local storage */
-  
   const renderProductList = async (product) => {
     const items = document.querySelector('.items');
     product.forEach((element) => {
@@ -93,6 +91,7 @@ const callFetch = async () => {
 
     function buttonEvent() {
     const productButton = document.querySelectorAll('.item__add');
+    // console.log(productButton);
     productButton.forEach((addProduct) => {
       addProduct.addEventListener('click', async (event) => {
         const idProduct = getSkuFromProductItem(event.target.parentNode);
@@ -125,11 +124,11 @@ const afterLoadingAPI = () => {
 
 const funct = async () => {
   const delStorage = localStorage.getItem('item');
-  console.log(delStorage);
+  // console.log(delStorage);
   const newObject = await JSON.parse(delStorage);/* string dentro do array novamente */
-  console.log(newObject);
+  // console.log(newObject);
   return newObject.forEach((element) => {
-    console.log(element);
+    // console.log(element);
     const createCart = createCartItemElement(element);
     joinItemsCart(createCart);
   });
